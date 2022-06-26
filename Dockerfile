@@ -1,4 +1,4 @@
-FROM lukemathwalker/cargo-chef:0.1.33-rust-1.56.1-bullseye AS chef
+FROM lukemathwalker/cargo-chef:0.1.35-rust-1.59.0-bullseye AS chef
 
 FROM chef AS planner
 WORKDIR /plan
@@ -13,5 +13,5 @@ COPY . .
 RUN cargo build --release
 
 FROM gcr.io/distroless/cc@sha256:1b82fde9abdd6b83077fa99af6b7bb93fcde1e93325eb00bfb814d5068ce60d9
-COPY --from=builder /build/target/release/main /
-ENTRYPOINT ["/main"]
+COPY --from=builder /build/target/release/rustreleaser /
+ENTRYPOINT ["/rustreleaser"]
