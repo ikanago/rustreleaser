@@ -1,6 +1,9 @@
 use anyhow::Result;
 
-use crate::{action::{Action, build::Build}, context::Context};
+use crate::{
+    action::{build::Build, cargo_config::CargoConfig, Action},
+    context::Context,
+};
 
 pub enum Pipeline {
     Build,
@@ -20,6 +23,6 @@ impl Pipeline {
     }
 
     fn create_build_pipeline() -> Vec<Box<dyn Action>> {
-        vec![Box::new(Build)]
+        vec![Box::new(CargoConfig), Box::new(Build)]
     }
 }

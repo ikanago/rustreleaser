@@ -6,11 +6,12 @@ mod action;
 mod config;
 mod context;
 mod pipeline;
+#[cfg(test)]
+mod tests;
 
 fn main() {
-    let project = Project {
-        dist: "./tmp".to_string(),
-    };
+    let mut project = Project::default();
+    project.dist = "tmp".to_string();
     let mut context = Context { project };
     let pipeline = Pipeline::Build;
     if let Err(err) = pipeline.run(&mut context) {
